@@ -1,5 +1,5 @@
 {
-  "name": "@orpheus/frontend",
+  "name": "@orpheus/lyre",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -18,7 +18,7 @@
     "zod": "*"
   },
   "nx": {
-    "name": "frontend",
+    "name": "lyre",
     "targets": {
       "build": {
         "cache": true,
@@ -50,7 +50,7 @@
         },
         "options": {
           "command": "vite build",
-          "cwd": "apps/frontend"
+          "cwd": "apps/lyre"
         },
         "outputs": [
           "{projectRoot}/dist"
@@ -76,7 +76,7 @@
           "^build",
           {
             "projects": [
-              "backend"
+              "echo"
             ],
             "target": "dev"
           }
@@ -95,7 +95,7 @@
         },
         "options": {
           "command": "vite",
-          "cwd": "apps/frontend"
+          "cwd": "apps/lyre"
         },
         "parallelism": true,
         "syncGenerators": [
@@ -110,7 +110,7 @@
           "default",
           "^default",
           "{workspaceRoot}/eslint.config.mjs",
-          "{workspaceRoot}/apps/frontend/eslint.config.mjs",
+          "{workspaceRoot}/apps/lyre/eslint.config.mjs",
           "{workspaceRoot}/tools/eslint-rules/**/*",
           {
             "externalDependencies": [
@@ -131,7 +131,7 @@
         },
         "options": {
           "command": "eslint .",
-          "cwd": "apps/frontend",
+          "cwd": "apps/lyre",
           "lintFilePatterns": [
             "{projectRoot}/**/*.{ts,tsx,js,jsx}",
             "{projectRoot}/package.json"
@@ -162,7 +162,7 @@
         },
         "options": {
           "command": "vite preview",
-          "cwd": "apps/frontend"
+          "cwd": "apps/lyre"
         },
         "parallelism": true
       },
@@ -212,7 +212,7 @@
         },
         "options": {
           "command": "vitest",
-          "cwd": "apps/frontend"
+          "cwd": "apps/lyre"
         },
         "outputs": [
           "{projectRoot}/test-output/vitest/coverage"
@@ -248,7 +248,7 @@
         },
         "options": {
           "command": "tsc --build --emitDeclarationOnly",
-          "cwd": "apps/frontend"
+          "cwd": "apps/lyre"
         },
         "outputs": [
           "{projectRoot}/**/*.js",
@@ -282,7 +282,7 @@
         ],
         "executor": "nx:run-commands",
         "options": {
-          "command": "pnpm exec nx watch --projects frontend --includeDependentProjects -- pnpm exec nx build-deps frontend"
+          "command": "pnpm exec nx watch --projects lyre --includeDependentProjects -- pnpm exec nx build-deps lyre"
         },
         "parallelism": true
       }

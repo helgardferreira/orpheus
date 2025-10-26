@@ -13,7 +13,7 @@ export default defineConfig(() => ({
       transformMixedEsModules: true,
     },
   },
-  cacheDir: '../../node_modules/.vite/apps/frontend',
+  cacheDir: '../../node_modules/.vite/apps/lyre',
   define: {
     /*
      * solid-testing-library relies on "process" which is not shimmed by default
@@ -49,7 +49,7 @@ export default defineConfig(() => ({
     environment: 'jsdom',
     globals: true,
     include: ['{src,tests}/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-    name: 'frontend',
+    name: 'lyre',
     reporters: ['default'],
     watch: false,
   },

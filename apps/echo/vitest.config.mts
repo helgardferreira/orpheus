@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig(() => ({
-  cacheDir: '../../node_modules/.vite/apps/backend',
+  cacheDir: '../../node_modules/.vite/apps/echo',
   root: __dirname,
   test: {
     coverage: {
@@ -11,7 +11,7 @@ export default defineConfig(() => ({
     environment: 'node',
     globals: true,
     include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts}'],
-    name: 'backend',
+    name: 'echo',
     reporters: ['default'],
     watch: false,
   },

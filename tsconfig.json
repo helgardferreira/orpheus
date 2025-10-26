@@ -4,13 +4,13 @@
   "files": [],
   "references": [
     {
-      "path": "./apps/frontend"
+      "path": "./apps/lyre"
     },
     {
-      "path": "./apps/frontend-e2e"
+      "path": "./apps/lyre-e2e"
     },
     {
-      "path": "./apps/backend"
+      "path": "./apps/echo"
     },
     {
       "path": "./libs/solid-xstate"

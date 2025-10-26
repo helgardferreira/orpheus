@@ -12,8 +12,8 @@ export default defineConfig({
    * Enables debug mode to log SQL queries and discovery information.
    */
   debug: true,
-  entities: [path.join(process.cwd(), 'apps/backend/dist/src/**/*.entity.js')],
-  entitiesTs: [path.join(process.cwd(), 'apps/backend/src/**/*.entity.ts')],
+  entities: [path.join(process.cwd(), 'apps/echo/dist/src/**/*.entity.js')],
+  entitiesTs: [path.join(process.cwd(), 'apps/echo/src/**/*.entity.ts')],
   extensions: [SeedManager],
   forceUtcTimezone: true,
   /**
@@ -57,11 +57,11 @@ export default defineConfig({
     /**
      * Path to the folder with seeders.
      */
-    path: path.join(process.cwd(), 'apps/backend/dist/mikro-orm/seeders'),
+    path: path.join(process.cwd(), 'apps/echo/dist/mikro-orm/seeders'),
     /**
      * Path to the folder with TS seeders (if used, you should
      * put path to compiled files in `path`).
      */
-    pathTs: path.join(process.cwd(), 'apps/backend/mikro-orm/seeders'),
+    pathTs: path.join(process.cwd(), 'apps/echo/mikro-orm/seeders'),
   },
 });

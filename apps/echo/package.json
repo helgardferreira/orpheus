@@ -1,5 +1,5 @@
 {
-  "name": "@orpheus/backend",
+  "name": "@orpheus/echo",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -20,9 +20,9 @@
     "zod": "*"
   },
   "nx": {
-    "name": "backend",
+    "name": "echo",
     "projectType": "application",
-    "sourceRoot": "apps/backend/src",
+    "sourceRoot": "apps/echo/src",
     "targets": {
       "build": {
         "configurations": {
@@ -67,7 +67,7 @@
           "default",
           "^default",
           "{workspaceRoot}/eslint.config.mjs",
-          "{workspaceRoot}/apps/backend/eslint.config.mjs",
+          "{workspaceRoot}/apps/echo/eslint.config.mjs",
           "{workspaceRoot}/tools/eslint-rules/**/*",
           {
             "externalDependencies": [
@@ -88,7 +88,7 @@
         },
         "options": {
           "command": "eslint .",
-          "cwd": "apps/backend"
+          "cwd": "apps/echo"
         },
         "outputs": [
           "{options.outputFile}"
@@ -98,10 +98,10 @@
       "dev": {
         "configurations": {
           "development": {
-            "buildTarget": "backend:build:development"
+            "buildTarget": "echo:build:development"
           },
           "production": {
-            "buildTarget": "backend:build:production"
+            "buildTarget": "echo:build:production"
           }
         },
         "continuous": true,
@@ -145,7 +145,7 @@
         },
         "options": {
           "command": "vitest",
-          "cwd": "apps/backend",
+          "cwd": "apps/echo",
           "passWithNoTests": true
         },
         "outputs": [
@@ -182,7 +182,7 @@
         },
         "options": {
           "command": "tsc --build --emitDeclarationOnly",
-          "cwd": "apps/backend"
+          "cwd": "apps/echo"
         },
         "outputs": [
           "{projectRoot}/dist/**/*.d.ts",
@@ -205,7 +205,7 @@
         ],
         "executor": "nx:run-commands",
         "options": {
-          "command": "pnpm exec nx watch --projects backend --includeDependentProjects -- pnpm exec nx build-deps backend"
+          "command": "pnpm exec nx watch --projects echo --includeDependentProjects -- pnpm exec nx build-deps echo"
         },
         "parallelism": true
       }

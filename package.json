@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "nx run frontend:dev",
+    "dev": "nx run lyre:dev",
     "lint": "nx run-many --all --targets=lint",
     "orm:debug": "mikro-orm debug",
     "orm:schema:create": "mikro-orm schema:create --run",
@@ -17,10 +17,10 @@
   },
   "mikro-orm": {
     "configPaths": [
-      "apps/backend/mikro-orm/sqlite.config.ts",
-      "apps/backend/dist/mikro-orm/sqlite.config.js"
+      "apps/echo/mikro-orm/sqlite.config.ts",
+      "apps/echo/dist/mikro-orm/sqlite.config.js"
     ],
-    "tsConfigPath": "apps/backend/tsconfig.app.json",
+    "tsConfigPath": "apps/echo/tsconfig.app.json",
     "useTsNode": true
   },
   "private": true,

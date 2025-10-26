@@ -1,10 +1,10 @@
 {
-  "name": "frontend-e2e",
+  "name": "lyre-e2e",
   "version": "0.0.1",
   "private": true,
   "nx": {
     "implicitDependencies": [
-      "frontend"
+      "lyre"
     ],
     "targets": {
       "e2e": {
@@ -13,7 +13,7 @@
         "dependsOn": [
           {
             "projects": [
-              "frontend"
+              "lyre"
             ],
             "target": "preview"
           }
@@ -44,7 +44,7 @@
         },
         "options": {
           "command": "playwright test",
-          "cwd": "apps/frontend-e2e"
+          "cwd": "apps/lyre-e2e"
         },
         "outputs": [
           "{projectRoot}/test-output/playwright/output",
@@ -61,7 +61,7 @@
           "default",
           "^default",
           "{workspaceRoot}/eslint.config.mjs",
-          "{workspaceRoot}/apps/frontend-e2e/eslint.config.mjs",
+          "{workspaceRoot}/apps/lyre-e2e/eslint.config.mjs",
           "{workspaceRoot}/tools/eslint-rules/**/*",
           {
             "externalDependencies": [
@@ -85,7 +85,7 @@
         },
         "options": {
           "command": "eslint .",
-          "cwd": "apps/frontend-e2e",
+          "cwd": "apps/lyre-e2e",
           "lintFilePatterns": [
             "{projectRoot}/**/*.{ts,tsx,js,jsx}",
             "{projectRoot}/package.json"
@@ -138,7 +138,7 @@
         },
         "options": {
           "command": "tsc --build --emitDeclarationOnly",
-          "cwd": "apps/frontend-e2e"
+          "cwd": "apps/lyre-e2e"
         },
         "outputs": [
           "{projectRoot}/out-tsc/playwright/**/*.d.ts",
