@@ -1,17 +1,15 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import {
   type AccessToken,
   type SignInUser,
   type SignUpUser,
-  UserSchema,
+  epochMillisToDate,
 } from '@orpheus/schemas';
 
 import { UsersService } from '../users/users.service';
 
-// TODO: go through nestjs encryption and hashing docs - https://docs.nestjs.com/security/encryption-and-hashing
-// TODO: continue here after creating `UserEntity` and `user` sqlite table...
 @Injectable()
 export class AuthService {
   constructor(
@@ -20,19 +18,15 @@ export class AuthService {
   ) {}
 
   async signIn(data: SignInUser): Promise<AccessToken> {
-    const user = await this.usersService.findOneByUsername(data.username);
+    const user = await this.usersService.verify(data);
 
-    if (user?.password !== data.password) {
-      throw new UnauthorizedException();
-    }
-
-    const { createdAt, id, updatedAt, username } = UserSchema.encode(user);
+    const { createdAt, id, updatedAt, username } = user;
 
     const payload: Omit<TokenPayload, 'exp' | 'iat'> = {
       sub: id,
       user: {
-        createdAt,
-        updatedAt,
+        createdAt: epochMillisToDate.encode(createdAt),
+        updatedAt: epochMillisToDate.encode(updatedAt),
         username,
       },
     };
@@ -43,13 +37,13 @@ export class AuthService {
   async signUp(data: SignUpUser): Promise<AccessToken> {
     const user = await this.usersService.create(data);
 
-    const { createdAt, id, updatedAt, username } = UserSchema.encode(user);
+    const { createdAt, id, updatedAt, username } = user;
 
     const payload: Omit<TokenPayload, 'exp' | 'iat'> = {
       sub: id,
       user: {
-        createdAt,
-        updatedAt,
+        createdAt: epochMillisToDate.encode(createdAt),
+        updatedAt: epochMillisToDate.encode(updatedAt),
         username,
       },
     };

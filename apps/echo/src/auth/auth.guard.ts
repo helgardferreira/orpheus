@@ -12,7 +12,6 @@ import { UserSessionSchema } from '@orpheus/schemas';
 
 import { AuthConfig } from '../common/schemas';
 
-// TODO: refactor this after updating `UserSession` to only contain minimal information
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(

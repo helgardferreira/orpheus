@@ -3,12 +3,7 @@ import { wrap } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import {
-  type CreateTodo,
-  type Todo,
-  TodoSchema,
-  type UpdateTodo,
-} from '@orpheus/schemas';
+import type { CreateTodo, Todo, UpdateTodo } from '@orpheus/schemas';
 
 import { TodoEntity } from './entities';
 
@@ -30,37 +25,31 @@ export class TodosService {
   async findAll(): Promise<Todo[]> {
     const todos = await this.todoRepository.findAll();
 
-    return TodoSchema.array().parse(todos);
+    return todos;
   }
 
   async findOne(id: string): Promise<Todo> {
     const todo = await this.todoRepository.findOne(id);
 
-    if (!todo) {
-      throw new NotFoundException('Todo not found');
-    }
+    if (!todo) throw new NotFoundException('Todo not found');
 
-    return TodoSchema.parse(todo);
+    return todo;
   }
 
   async update(id: string, data: UpdateTodo): Promise<Todo> {
     const todo = await this.todoRepository.findOne(id);
 
-    if (!todo) {
-      throw new NotFoundException('Todo not found');
-    }
+    if (!todo) throw new NotFoundException('Todo not found');
 
     wrap(todo).assign(data);
     await this.em.flush();
 
-    return TodoSchema.parse(todo);
+    return todo;
   }
 
   async remove(id: string): Promise<void> {
     const count = await this.todoRepository.nativeDelete(id);
 
-    if (count === 0) {
-      throw new NotFoundException('Todo not found');
-    }
+    if (count === 0) throw new NotFoundException('Todo not found');
   }
 }

@@ -9,6 +9,7 @@ import { stringToInt } from '@orpheus/schemas';
  * application.
  */
 export const AuthConfigSchema = z.object({
+  HASH_SALT_ROUNDS: stringToInt,
   JWT_EXPIRES_IN: stringToInt,
   JWT_SECRET: z.string().min(1),
 });

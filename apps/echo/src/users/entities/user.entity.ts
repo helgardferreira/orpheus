@@ -14,10 +14,10 @@ export class UserEntity implements User {
   @Property()
   username: string;
 
-  @Property()
+  @Property({ type: 'datetime' })
   createdAt: Date & Opt = new Date();
 
-  @Property({ onUpdate: () => new Date() })
+  @Property({ onUpdate: () => new Date(), type: 'datetime' })
   updatedAt: Date & Opt = new Date();
 
   constructor(password: string, username: string) {

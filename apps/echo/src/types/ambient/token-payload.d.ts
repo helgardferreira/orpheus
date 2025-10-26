@@ -1,4 +1,3 @@
-// TODO: refactor this
 declare type TokenPayload = {
   exp: number;
   iat: number;
