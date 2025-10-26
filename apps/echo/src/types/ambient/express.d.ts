@@ -1,5 +1,6 @@
+// TODO: refactor this
 declare namespace Express {
   export interface Request {
-    user?: UserSession;
+    user?: import('@orpheus/schemas').UserSession;
   }
 }

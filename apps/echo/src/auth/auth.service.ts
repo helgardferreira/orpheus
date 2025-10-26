@@ -1,8 +1,17 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
+import {
+  type AccessToken,
+  type SignInUser,
+  type SignUpUser,
+  UserSchema,
+} from '@orpheus/schemas';
+
 import { UsersService } from '../users/users.service';
 
+// TODO: go through nestjs encryption and hashing docs - https://docs.nestjs.com/security/encryption-and-hashing
+// TODO: continue here after creating `UserEntity` and `user` sqlite table...
 @Injectable()
 export class AuthService {
   constructor(
@@ -10,20 +19,41 @@ export class AuthService {
     private usersService: UsersService
   ) {}
 
-  async signIn(
-    username: string,
-    pass: string
-  ): Promise<{ access_token: string }> {
-    const user = await this.usersService.findOne(username);
+  async signIn(data: SignInUser): Promise<AccessToken> {
+    const user = await this.usersService.findOneByUsername(data.username);
 
-    if (user?.password !== pass) {
+    if (user?.password !== data.password) {
       throw new UnauthorizedException();
     }
 
-    const payload = { sub: user.id, username: user.username };
+    const { createdAt, id, updatedAt, username } = UserSchema.encode(user);
 
-    return {
-      access_token: await this.jwtService.signAsync(payload),
+    const payload: Omit<TokenPayload, 'exp' | 'iat'> = {
+      sub: id,
+      user: {
+        createdAt,
+        updatedAt,
+        username,
+      },
     };
+
+    return { accessToken: await this.jwtService.signAsync(payload) };
+  }
+
+  async signUp(data: SignUpUser): Promise<AccessToken> {
+    const user = await this.usersService.create(data);
+
+    const { createdAt, id, updatedAt, username } = UserSchema.encode(user);
+
+    const payload: Omit<TokenPayload, 'exp' | 'iat'> = {
+      sub: id,
+      user: {
+        createdAt,
+        updatedAt,
+        username,
+      },
+    };
+
+    return { accessToken: await this.jwtService.signAsync(payload) };
   }
 }

@@ -1,0 +1,10 @@
+{
+  "sqltools.connections": [
+    {
+      "database": "${workspaceFolder:orpheus}/orpheus.db",
+      "driver": "SQLite",
+      "name": "Orpheus",
+      "previewLimit": 50
+    }
+  ]
+}

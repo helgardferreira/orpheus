@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 
 import { AuthConfig } from '../common/schemas';
@@ -10,11 +10,8 @@ import { AuthService } from './auth.service';
 
 @Module({
   imports: [
-    ConfigModule,
     JwtModule.registerAsync({
       global: true,
-      // TODO: determine if this `imports` is necessary since we're importing ConfigModule already above
-      imports: [ConfigModule],
       inject: [ConfigService<AuthConfig>],
       useFactory: (configService: ConfigService<AuthConfig>) => ({
         secret:

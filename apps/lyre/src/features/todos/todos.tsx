@@ -6,6 +6,7 @@ import { toaster } from '../../toaster';
 
 import { TodoList } from './todo-list/todo-list';
 
+// TODO: investigate best solutions for solid-js client-side routing
 // TODO: begin work on custom spotify app
 // TODO: continue here...
 export const Todos: Component = () => {

@@ -1,1 +1,1 @@
-export * from './current-api-user.decorator';
+export * from './current-user-session.decorator';

@@ -20,7 +20,7 @@ export class TodoEntity implements Todo {
   @Property()
   createdAt: Date & Opt = new Date();
 
-  @Property({ onUpdate: () => new Date().getTime() })
+  @Property({ onUpdate: () => new Date() })
   updatedAt: Date & Opt = new Date();
 
   constructor(data: CreateTodo) {

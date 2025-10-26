@@ -43,14 +43,14 @@ export class TodosService {
     return TodoSchema.parse(todo);
   }
 
-  async update(id: string, patch: UpdateTodo): Promise<Todo> {
+  async update(id: string, data: UpdateTodo): Promise<Todo> {
     const todo = await this.todoRepository.findOne(id);
 
     if (!todo) {
       throw new NotFoundException('Todo not found');
     }
 
-    wrap(todo).assign(patch);
+    wrap(todo).assign(data);
     await this.em.flush();
 
     return TodoSchema.parse(todo);

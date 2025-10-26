@@ -8,11 +8,11 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 
+import { UserSessionSchema } from '@orpheus/schemas';
+
 import { AuthConfig } from '../common/schemas';
 
-// TODO: investigate how to leverage `CurrentApiUser` decorator
-// TODO: refactor this
-// TODO: continue here...
+// TODO: refactor this after updating `UserSession` to only contain minimal information
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
@@ -21,23 +21,30 @@ export class AuthGuard implements CanActivate {
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const request = context.switchToHttp().getRequest();
+    const request = context.switchToHttp().getRequest<Request>();
     const token = this.extractTokenFromHeader(request);
 
-    if (!token) {
-      throw new UnauthorizedException();
-    }
+    if (!token) throw new UnauthorizedException();
 
     try {
-      const payload = await this.jwtService.verifyAsync(token, {
+      const payload = await this.jwtService.verifyAsync<TokenPayload>(token, {
         secret:
           this.configService.getOrThrow<AuthConfig['JWT_SECRET']>('JWT_SECRET'),
       });
 
-      // TODO: leverage `user-session.d.ts` ambient type here
-      // 💡 We're assigning the payload to the request object here
-      // so that we can access it in our route handlers
-      request['user'] = payload;
+      const {
+        sub,
+        user: { createdAt, updatedAt, username },
+      } = payload;
+
+      const user = UserSessionSchema.decode({
+        createdAt,
+        id: sub,
+        updatedAt,
+        username,
+      });
+
+      request.user = user;
     } catch {
       throw new UnauthorizedException();
     }

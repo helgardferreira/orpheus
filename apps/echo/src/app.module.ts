@@ -22,7 +22,6 @@ import { UsersModule } from './users/users.module';
 
     AuthModule,
     TodosModule,
-    // TODO: evaluate if this should be imported at app module level or only imported in auth module
     UsersModule,
   ],
   providers: [],

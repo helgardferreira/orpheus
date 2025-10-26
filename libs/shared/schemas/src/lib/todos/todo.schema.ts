@@ -2,6 +2,7 @@ import * as z from 'zod';
 
 import { epochMillisToDate } from '../utils/codecs/index.js';
 
+// TODO: remove todo example schemas later
 const TodoSchema = z.object({
   id: z.uuid(),
 
