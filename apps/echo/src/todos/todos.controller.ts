@@ -8,7 +8,7 @@ import {
   Post,
   UseInterceptors,
 } from '@nestjs/common';
-import { z } from 'zod';
+import * as z from 'zod';
 
 import {
   type CreateTodo,

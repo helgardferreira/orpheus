@@ -1,5 +1,5 @@
 import type { ActorRef, Snapshot } from 'xstate';
-import type { z } from 'zod';
+import type * as z from 'zod';
 
 import type { CreateTodo, Todo, UpdateTodo } from '@orpheus/schemas';
 

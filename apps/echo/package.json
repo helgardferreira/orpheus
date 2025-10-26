@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@faker-js/faker": "*",
-    "@orpheus/schemas": "workspace:*",
     "@mikro-orm/better-sqlite": "*",
     "@mikro-orm/core": "*",
     "@mikro-orm/nestjs": "*",
@@ -13,6 +12,8 @@
     "@nestjs/common": "*",
     "@nestjs/config": "*",
     "@nestjs/core": "*",
+    "@nestjs/jwt": "*",
+    "@orpheus/schemas": "workspace:*",
     "express": "*",
     "lodash": "*",
     "rxjs": "*",

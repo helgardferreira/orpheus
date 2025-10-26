@@ -4,6 +4,7 @@ import {
   ExecutionContext,
   Injectable,
   InternalServerErrorException,
+  Logger,
   NestInterceptor,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
@@ -22,7 +23,7 @@ export class ZodResponseInterceptor<T> implements NestInterceptor {
             ? this.schema.array().encode(value)
             : this.schema.encode(value);
         } catch (err) {
-          console.log(err);
+          Logger.error(err);
 
           throw new InternalServerErrorException(
             'Internal response did not match the contract.'

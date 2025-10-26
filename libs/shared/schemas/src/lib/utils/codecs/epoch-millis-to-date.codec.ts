@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 export const epochMillisToDate = z.codec(
   z.union([z.string().regex(z.regexes.integer), z.int().min(0)]),

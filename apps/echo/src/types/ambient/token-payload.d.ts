@@ -1,4 +1,6 @@
+// TODO: implement this
 declare type TokenPayload = {
+  /*
   aud?: string | string[];
   azp?: string;
   exp?: number;
@@ -6,4 +8,10 @@ declare type TokenPayload = {
   iss?: string;
   scope?: string;
   sub: string;
+  */
+
+  exp: number;
+  iat: number;
+  sub: number;
+  username: string;
 };

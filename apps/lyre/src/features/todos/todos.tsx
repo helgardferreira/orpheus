@@ -7,7 +7,6 @@ import { toaster } from '../../toaster';
 import { TodoList } from './todo-list/todo-list';
 
 // TODO: begin work on custom spotify app
-// TODO: investigate spotify api
 // TODO: continue here...
 export const Todos: Component = () => {
   return (
